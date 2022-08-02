@@ -3,6 +3,8 @@ package com.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Random;
+
 import com.beans.Account;
 import com.connection.GetConnection;
 
@@ -24,8 +26,8 @@ public class AccountDAO implements IAccountDAO {
 			ps.setString(4, account.getMobNo());
 			ps.setString(5, account.getEmail());
 			ps.setString(6, account.getAddress());
-			ps.setString(7, account.getAccNo());
-			ps.setDouble(8, account.getBalance());
+			ps.setDouble(7, account.getBalance());
+			ps.setString(8, account.getAccNo());
 
 			return ps.executeUpdate() > 0;
 		} catch (SQLException e) {
@@ -88,7 +90,7 @@ public class AccountDAO implements IAccountDAO {
 			e.printStackTrace();
 		}
 		return "Amount deposited :: " + amount;
-	
+
 	}
 
 	public Account getAccount(String accNo) {
