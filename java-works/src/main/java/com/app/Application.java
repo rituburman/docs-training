@@ -14,7 +14,7 @@ public class Application {
 
 		boolean loop = true;
 		while (true) {
-			String menu = "\n\n\n\t\t\t Welcome to the ABC Bank System" + "\nPlease choose an option ::"
+			String menu = "\n\n\n\t\t\t Welcome to the ABC Bank System" + "\n\nPlease choose an option ::"
 					+ "\n\nPress 1 to create a new account." + "\nPress 2 for viewing account details."
 					+ "\nPress 3 to check account balance." + "\nPress 4 to withdraw money."
 					+ "\nPress 5 to deposit money." + "\nPress 0 to exit.";
@@ -40,15 +40,24 @@ public class Application {
 				account.setLastname(lname);
 				System.out.println("Enter mobile no: ");
 				String mb = sc.next();
-				account.setMobNo(mb);
+				if (mb.length() == 10)
+					account.setMobNo(mb);
+				else {
+					System.out.println("Number Invalid. Please retry!");
+					break;
+				}
 				System.out.println("Enter email: ");
 				String em = sc.next();
-				account.setEmail(em);
+				if (em.contains(".com"))
+					account.setEmail(em);
+				else {
+					System.out.println("Email invalid. Please retry!");
+					break;
+				}
 				System.out.println("Enter address: ");
 				String address = sc.next();
 				account.setAddress(address);
-				System.out.println("Enter balance: ");
-				double bal = sc.nextDouble();
+				double bal = 500;
 				account.setBalance(bal);
 				System.out.println("Your Account Number is: ");
 				String accno = RandomString.getAlphaNumericString(12).toUpperCase();
@@ -62,7 +71,7 @@ public class Application {
 				System.out.println("You chose to view account details.");
 				System.out.println("Enter Account number: ");
 				String acc = sc.next();
-				System.out.println(dao.getAccount(acc));
+				dao.getAccount(acc);
 				break;
 
 			case 3:

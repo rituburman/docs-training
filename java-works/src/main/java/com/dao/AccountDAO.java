@@ -3,7 +3,6 @@ package com.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Random;
 
 import com.beans.Account;
 import com.connection.GetConnection;
@@ -93,29 +92,26 @@ public class AccountDAO implements IAccountDAO {
 
 	}
 
-	public Account getAccount(String accNo) {
+	public void getAccount(String accNo) {
 		String sql = "select username, firstname, lastname, mobile, email, address, balance from account where acc_no =?";
 		try {
 			ps = GetConnection.getSql().prepareStatement(sql);
 			ps.setString(1, accNo);
 			ResultSet resultSet = ps.executeQuery();
 			if (resultSet.next()) {
-				Account account = new Account();
-				account.setUsername(resultSet.getString(1));
-				account.setFirstname(resultSet.getString(2));
-				account.setLastname(resultSet.getString(3));
-				account.setMobNo(resultSet.getString(4));
-				account.setEmail(resultSet.getString(5));
-				account.setAddress(resultSet.getString(6));
-				account.setBalance(resultSet.getDouble(7));
+				System.out.println("Username: " + resultSet.getString(1));
+				System.out.println("First Name: " + resultSet.getString(2));
+				System.out.println("Last Name: " + resultSet.getString(3));
+				System.out.println("Mobile Number: " + resultSet.getString(4));
+				System.out.println("Email: " + resultSet.getString(5));
+				System.out.println("Address: " + resultSet.getString(6));
+				System.out.println("Balance: " + resultSet.getDouble(7));
 
-				return account;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return null;
 	}
 
 }
